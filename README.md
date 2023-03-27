@@ -11,8 +11,8 @@ The game itself resembles 'Geometry Dash,' a basic computer game where the playe
 
 **The Evolution:**
 
-Our AI will play the same geometric course multiple times, and will get better at the game each time. 
+Our AI will take the form of an evolutionary algorithm, meaning that it will start with a certain set of parameters, and then generate some number of "players" based on those parameters, each with small tweeks. These AI "players" will then play through the geometric course and afterwards, each will be graded based on a pre-determined set of critera. The most successful "player" will move on to the next iteration, with another set of "players" created through minor tweeks to the most successful one, and they will all play the game again. The other players from the previous round will be killed off. Ultimately, the player bots will get better and better after each iteration until they have optimized their performance. 
 
 **The Human:**
 
-We plan to use networking in order to have the human input responses to teaching prompts, and recieve the correct answer. The person will watch the game and think about how the computer got better, and then will be asked questions about what they think will happen next. We want this game to show that the basics of AI are not incredibly complicated: simply to demonstrate how a computer gets better at solving problems as it completes more and more of them. 
+We plan to use networking in order to have the human input responses to teaching prompts, and recieve the correct answer. The person will watch the game and think about how the computer got better, and then will be asked questions about what they think will happen next. We want this game to show that the basics of AI are not incredibly complicated: simply to demonstrate one way in which a computer gets better at solving problems as it completes them many times. 
