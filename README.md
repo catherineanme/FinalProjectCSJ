@@ -6,10 +6,13 @@ Welcome to our CS32 Final Project! As Artificial Intelligence (AI) becomes more 
 
 
 **The Game**
+
 The game itself resembles 'Geometry Dash,' a basic computer game where the player has to jump over obstacles that they face. It's the same course each time. However, increased agility, faster reaction time, and most importantly repeated run-throughs of the course make a player 'better' at the game, because one knows what to expect. 
 
 **The Evolution**
+
 Our AI will play the same geometric course multiple times, and will get better at the game each time. 
 
 **The Human**
+
 We plan to use networking in order to have the human input responses to teaching prompts, and recieve the correct answer. The person will watch the game and think about how the computer got better, and then will be asked questions about what they think will happen next. We want this game to show that the basics of AI are not incredibly complicated: simply to demonstrate how a computer gets better at solving problems as it completes more and more of them. 
