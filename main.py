@@ -3,6 +3,7 @@
 #  date created: 2020-11-10 6:21 p.m.
 #  last modified: 2020-11-18
 #  Pydash: Similar to Geometry Dash, a rhythm based platform game, but programmed using the pygame library in Python
+# this is what I found online -- we can use it for inspiration / as a base. 
 
 
 """CONTROLS
