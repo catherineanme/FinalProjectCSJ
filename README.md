@@ -28,3 +28,41 @@ Mutation Factor
 
 **What we want our game’s script to output:** 
 We want the game to be similar to the game Geometry Dash with an artificially intelligent twist: it’ll get better at the game with each round it plays. We want to be able to watch these rounds so we can screen-record them and put the videos into the learning module. 
+
+
+Here's a sample of the mutation program that we have been building. This code takes an array and creates a list of inputs and outputs. 
+
+
+def BreedMutate(array): #input is an array of tuples, sorted by tup[1]
+    sortedList = array
+    length = int(len(sortedList)*0.5) #this is of the yValues
+    fittest = sortedList[length:]
+    children = []
+    for parent in fittest:
+        ix = fittest.index(parent)
+        if(ix%2 == 1):
+            offspring = (fittest[ix][0] + fittest[ix-1][0]) * 0.5
+            children.append([offspring, yValIndiv(offspring)])
+            #print(offspring)
+    #print(children)
+    noise = np.random.normal(0,0.25,len(array))
+    for i in range(len(children)):
+        mutated = children[i][0] + noise[i]
+        if(mutated > 4):
+            mutated = 4
+        elif(mutated < 0):
+            mutated = 0
+        sortedList.append([mutated, yValIndiv(mutated)])
+    #now we want to sort again by fit and kill the lowest three performers
+    newSortedList = sorted(sortedList, key=lambda tup: tup[1]) #this is where we sort at the end, so that the input for the next iteration is sorted\
+    x = []
+    y = []
+    for i in range(len(newSortedList)):
+        x.append(newSortedList[i][0])
+        y.append(newSortedList[i][1])
+    return newSortedList[3:] #this kills 3 weakest
+
+
+
+
+
