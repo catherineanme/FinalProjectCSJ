@@ -32,7 +32,6 @@ We want the game to be similar to the game Geometry Dash with an artificially in
 
 Here's a sample of the mutation program that we have been building. This code takes an array and creates a list of inputs and outputs. 
 
-
 def BreedMutate(array): #input is an array of tuples, sorted by tup[1]
     sortedList = array
     length = int(len(sortedList)*0.5) #this is of the yValues
@@ -61,6 +60,11 @@ def BreedMutate(array): #input is an array of tuples, sorted by tup[1]
         x.append(newSortedList[i][0])
         y.append(newSortedList[i][1])
     return newSortedList[3:] #this kills 3 weakest
+    
+    
+    We found Geometry Dash on GitHub already coded in Python by Yonah Aviv from MIT. We are using this code as a base and then are going to incorporate our AI model into it. We had to realize that coding this AI is really difficult, and learning the pygames library to make a complete game with graphics, etc. is a heavy task to combine with making our own mutating AI system & educational model! 
+    
+    So from now on, we are buidling these mutations and learning how to make this program work / build to it, and learning how to incorporate AI into the game. We already begun writing up mini-modules that correspond with different things that we ourselves have learned throughout this process, AND very introductory texts for people who have zero knowledge at all! IF we have time towards the end of our project, we could try to make our own game but we really want to focus on the AI / education components. 
 
 
 
