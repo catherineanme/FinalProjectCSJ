@@ -31,10 +31,8 @@ We want the game to be similar to the game Geometry Dash with an artificially in
 
 
 We attached to this README a sample of the mutation program that we have been building. This code takes an array and creates a list of inputs and outputs. 
-    
-    We found Geometry Dash on GitHub already coded in Python by Yonah Aviv from MIT. We are using this code as a base and then are going to incorporate our AI model into it. We had to realize that coding this AI is really difficult, and learning the pygames library to make a complete game with graphics, etc. is a heavy task to combine with making our own mutating AI system & educational model! 
-    
-    So from now on, we are buidling these mutations and learning how to make this program work / build to it, and learning how to incorporate AI into the game. We already begun writing up mini-modules that correspond with different things that we ourselves have learned throughout this process, AND very introductory texts for people who have zero knowledge at all! IF we have time towards the end of our project, we could try to make our own game but we really want to focus on the AI / education components. 
+We found Geometry Dash on GitHub already coded in Python by Yonah Aviv from MIT. We are using this code as a base and then are going to incorporate our AI model into it. We had to realize that coding this AI is really difficult, and learning the pygames library to make a complete game with graphics, etc. is a heavy task to combine with making our own mutating AI system & educational model! 
+So from now on, we are buidling these mutations and learning how to make this program work / build to it, and learning how to incorporate AI into the game. We already begun writing up mini-modules that correspond with different things that we ourselves have learned throughout this process, AND very introductory texts for people who have zero knowledge at all! IF we have time towards the end of our project, we could try to make our own game but we really want to focus on the AI / education components. 
 
 
 <img width="1061" alt="Screen Shot 2023-04-10 at 10 05 45 PM" src="https://user-images.githubusercontent.com/128994611/231036722-61c4af13-27a3-47c2-9b00-ae8b28c0b825.png">
