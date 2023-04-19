@@ -3,7 +3,7 @@
 #  date created: 2020-11-10 6:21 p.m.
 #  last modified: 2020-11-18
 #  Pydash: Similar to Geometry Dash, a rhythm based platform game, but programmed using the pygame library in Python
-# this is what I found online -- we can use it for inspiration / as a base. 
+# this is what I found online -- we can use it for inspiration / as a base.
 
 
 """CONTROLS
@@ -566,7 +566,9 @@ while not done:
     player.vel.x = 6
 
     eval_outcome(player.win, player.died)
-    if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+    # if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+    random_number = random.randint(0,100)
+    if random_number <= 10:
         player.isjump = True
 
     # Reduce the alpha of all pixels on this surface each frame.

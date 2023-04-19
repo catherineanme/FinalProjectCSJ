@@ -17,6 +17,7 @@ If you die or beat the level, press SPACE to restart or go to the next level
 import csv
 import os
 import random
+import time
 
 # import the pygame module
 import pygame
@@ -553,6 +554,7 @@ player = Player(avatar, elements, (150, 150), player_sprite)
 # show tip on start and on death
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
+
 while not done:
     keys = pygame.key.get_pressed()
 
@@ -562,10 +564,16 @@ while not done:
 
         start = True
 
+
+
     player.vel.x = 6
 
     eval_outcome(player.win, player.died)
-    if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+    
+    # This is where I started editing stuff
+    # if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+    random_number = random.randint(0,100)
+    if random_number <= 10:
         player.isjump = True
 
     # Reduce the alpha of all pixels on this surface each frame.
