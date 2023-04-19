@@ -41,6 +41,11 @@ start = False
 # sets the frame rate of the program
 clock = pygame.time.Clock()
 
+record = 0
+moves = []
+loop = 0
+
+
 """
 CONSTANTS
 """
@@ -319,7 +324,7 @@ def blitRotate(surf, image, pos, originpos: tuple, angle: float):
 
 def won_screen():
     """show this screen when beating a level"""
-    global attempts, level, fill
+    global attempts, level, fill, time_0
     attempts = 0
     player_sprite.clear(player.image, screen)
     screen.fill(pygame.Color("yellow"))
@@ -339,12 +344,12 @@ def won_screen():
     level += 1
 
     wait_for_key()
-    reset()
+    time_0 = reset()
 
 
 def death_screen():
     """show this screenon death"""
-    global attempts, fill
+    global attempts, fill, time_0
     fill = 0
     player_sprite.clear(player.image, screen)
     attempts += 1
@@ -354,14 +359,25 @@ def death_screen():
     screen.blits([[game_over, (100, 100)], [tip, (100, 400)]])
 
     wait_for_key()
-    reset()
+    time_0 = reset()
 
 
 def eval_outcome(won: bool, died: bool):
     """simple function to run the win or die screen after checking won or died"""
+    global record, moves, loop, time_0
     if won:
         won_screen()
     if died:
+        print(f"moves = {moves}")
+
+        loop = 0
+        evaluation = time.time() - time_0
+        print(f"evaluation = {evaluation}")
+        print(f"time_0 = {time_0}")
+        if evaluation > record:
+            record = evaluation
+            moves = moves[:-20]
+        print(f"record = {record}")
         death_screen()
 
 
@@ -401,7 +417,7 @@ def start_screen():
 def reset():
     """resets the sprite groups, music, etc. for death and new level"""
     global player, elements, player_sprite, level
-
+    time_0 = time.time()
     if level == 1:
         pygame.mixer.music.load(os.path.join("music", "castle-town.mp3"))
     pygame.mixer_music.play()
@@ -411,6 +427,7 @@ def reset():
     init_level(
             block_map(
                     level_num=levels[level]))
+    return time_0
 
 
 def move_map():
@@ -555,12 +572,13 @@ player = Player(avatar, elements, (150, 150), player_sprite)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
 
+
 while not done:
     keys = pygame.key.get_pressed()
 
     if not start:
         wait_for_key()
-        reset()
+        time_0 = reset()
 
         start = True
 
@@ -569,12 +587,26 @@ while not done:
     player.vel.x = 6
 
     eval_outcome(player.win, player.died)
-    
+
     # This is where I started editing stuff
     # if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
-    random_number = random.randint(0,100)
-    if random_number <= 10:
-        player.isjump = True
+    if len(moves) > loop:
+        random_number = random.randint(0,100)
+        if random_number < 5 and moves[loop] == 0:
+            moves[loop] = 1
+            player.isjump = True
+        elif random_number < 5 and moves[loop] == 1:
+            moves[loop] = 0
+        elif moves[loop] == 1:
+            player.isjump = True
+    else:
+        random_number = random.randint(0,100)
+        if random_number <= 10:
+            player.isjump = True
+            moves.append(1)
+        else:
+            moves.append(0)
+
 
     # Reduce the alpha of all pixels on this surface each frame.
     # Control the fade2 speed with the alpha value.
@@ -619,4 +651,5 @@ while not done:
 
     pygame.display.flip()
     clock.tick(60)
+    loop += 1
 pygame.quit()
