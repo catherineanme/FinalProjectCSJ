@@ -557,11 +557,11 @@ player = Player(avatar, elements, (150, 150), player_sprite)
 tip = font.render("tip: tap and hold for the first few seconds of the level", True, BLUE)
 
 class AI_Player():
-    def __init__(self, parent):
+    def __init__(self, parent, mutation):
         if (parent == None):
             start_num = 0
         else:
-            start_num = parent.fitness - 40
+            start_num = parent.fitness - mutation
         self.fitness = 0
         self.moves = []
         for i in range(start_num):
@@ -569,95 +569,127 @@ class AI_Player():
         for i in range(start_num, 1200):
             self.moves.append(random.randint(0,100))
 
-def initialize_pop(population, fittest): #OUR CODE
+def initialize_pop(population, fittest, mutation): #OUR CODE
     individuals = []
     for i in range(population):
-        new_player = AI_Player(fittest)
+        new_player = AI_Player(fittest, mutation)
         individuals.append(new_player)
     return individuals
 
-generations = 20
-population_size = 5
-mutation = 5
-fittest = AI_Player(None)
-for i in range(generations):
-
-    new_population = initialize_pop(population_size, fittest)
-    for individual in new_population:
-        frame = 0
-        done = False
-        while done == False:
-            keys = pygame.key.get_pressed()
-
-            #if not start:
-            #    wait_for_key()
-            #    reset()
-
-            start = True #should be indented
-
-            player.vel.x =  6
-
-            if (eval_outcome(player.win, player.died)):
-                individual.fitness = frame
-                done = True
-                reset()
 
 
-            #if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
-            if individual.moves[frame] < 5:
-                player.isjump = True
-
-
-            # Reduce the alpha of all pixels on this surface each frame.
-            # Control the fade2 speed with the alpha value.
-
-            alpha_surf.fill((255, 255, 255, 1), special_flags=pygame.BLEND_RGBA_MULT)
-
-            player_sprite.update()
-            CameraX = player.vel.x  # for moving obstacles
-            move_map()  # apply CameraX to all elements
-
-            screen.blit(bg, (0, 0))  # Clear the screen(with the bg)
-
-            #player.draw_particle_trail(player.rect.left - 1, player.rect.bottom + 2,
-            #                           WHITE)
-            screen.blit(alpha_surf, (0, 0))  # Blit the alpha_surf onto the screen.
-            draw_stats(screen, coin_count(coins))
-
-            if player.isjump:
-                """rotate the player by an angle and blit it if player is jumping"""
-                angle -= 8.1712  # this may be the angle needed to do a 360 deg turn in the length covered in one jump by player
-                blitRotate(screen, player.image, player.rect.center, (16, 16), angle)
+def playGame():
+    global angle, player, start, CameraX
+    while True:
+        try:
+            generations = int(input('How many generations do you want? - (between 5 and 15)'))
+            if (generations >= 5 and generations <= 15):
+                break
             else:
-                """if player.isjump is false, then just blit it normally(by using Group().draw() for sprites"""
-                player_sprite.draw(screen)  # draw player sprite group
-            elements.draw(screen)  # draw all other obstacles
+                print("Please input a number in the range")
+        except ValueError:
+            print("Please input a number")
+    while True:
+        try:
+            population_size = int(input('What population size do you want? - (between 5 and 15)'))
+            if (population_size >= 5 and population_size <= 15):
+                break
+            else:
+                print("Please input a number in the range")
+        except ValueError:
+            print("Please input a number")
 
-            for event in pygame.event.get():
+    while True:
+        try:
+            mutation = int(input('What mutation factor do you want? - (between 30 and 100)'))
+            if (mutation >= 30 and mutation <= 100):
+                break
+            else:
+                print("Please input a number in the range")
+        except ValueError:
+            print("Please input a number")
+    fittest = AI_Player(None, mutation)
+    for i in range(generations):
+        new_population = initialize_pop(population_size, fittest, mutation)
+        for individual in new_population:
+            frame = 0
+            done = False
+            while done == False:
+                keys = pygame.key.get_pressed()
 
-                if event.type == pygame.QUIT:
+                #if not start:
+                #    wait_for_key()
+                #    reset()
+
+                start = True #should be indented
+
+                player.vel.x =  6
+
+                if (eval_outcome(player.win, player.died)):
+                    individual.fitness = frame
                     done = True
+                    reset()
 
-                if event.type == pygame.KEYDOWN:
 
-                    if event.key == pygame.K_ESCAPE:
-                        """User friendly exit"""
+                #if keys[pygame.K_UP] or keys[pygame.K_SPACE]:
+                if individual.moves[frame] < 5:
+                    player.isjump = True
+
+
+                # Reduce the alpha of all pixels on this surface each frame.
+                # Control the fade2 speed with the alpha value.
+
+                alpha_surf.fill((255, 255, 255, 1), special_flags=pygame.BLEND_RGBA_MULT)
+
+                player_sprite.update()
+                CameraX = player.vel.x  # for moving obstacles
+                move_map()  # apply CameraX to all elements
+
+                screen.blit(bg, (0, 0))  # Clear the screen(with the bg)
+
+                #player.draw_particle_trail(player.rect.left - 1, player.rect.bottom + 2,
+                #                           WHITE)
+                screen.blit(alpha_surf, (0, 0))  # Blit the alpha_surf onto the screen.
+                draw_stats(screen, coin_count(coins))
+
+                if player.isjump:
+                    """rotate the player by an angle and blit it if player is jumping"""
+                    angle -= 8.1712  # this may be the angle needed to do a 360 deg turn in the length covered in one jump by player
+                    blitRotate(screen, player.image, player.rect.center, (16, 16), angle)
+                else:
+                    """if player.isjump is false, then just blit it normally(by using Group().draw() for sprites"""
+                    player_sprite.draw(screen)  # draw player sprite group
+                elements.draw(screen)  # draw all other obstacles
+
+                for event in pygame.event.get():
+
+                    if event.type == pygame.QUIT:
                         done = True
 
-                    if event.key == pygame.K_2:
-                        """change level by keypad"""
-                        player.jump_amount += 1
+                    if event.type == pygame.KEYDOWN:
 
-                    if event.key == pygame.K_1:
-                        """change level by keypad"""
-                        player.jump_amount -= 1
+                        if event.key == pygame.K_ESCAPE:
+                            """User friendly exit"""
+                            done = True
 
-            pygame.display.flip()
-            clock.tick(1000)
-            frame += 1
-        if individual.fitness > fittest.fitness:
-            fittest = individual
-    print(fittest.fitness)
-    print("this is generation " + str(i))
+                        if event.key == pygame.K_2:
+                            """change level by keypad"""
+                            player.jump_amount += 1
+
+                        if event.key == pygame.K_1:
+                            """change level by keypad"""
+                            player.jump_amount -= 1
+
+                pygame.display.flip()
+                clock.tick(1000)
+                frame += 1
+            if individual.fitness > fittest.fitness:
+                fittest = individual
+                print("new pb")
+        print(fittest.fitness)
+        print("this is generation " + str(i))
+
+if __name__ == "__main__":
+    playGame()
 
 pygame.quit()
