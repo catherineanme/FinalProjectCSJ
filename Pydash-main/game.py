@@ -321,15 +321,8 @@ def won_screen():
     attempts = 0
     player_sprite.clear(player.image, screen)
     screen.fill(pygame.Color("yellow"))
-    txt_win1 = txt_win2 = "Nothing"
-    if level == 1:
-        if coins == 6:
-            txt_win1 = f"Coin{coins}/6! "
-            txt_win2 = "the game, Congratulations"
-    else:
-        txt_win1 = f"level{level}"
-        txt_win2 = f"Coins: {coins}/6. "
-    txt_win = f"{txt_win1} You beat {txt_win2}! Press SPACE to restart, or ESC to exit"
+
+    txt_win = "The AI Won!"
 
     won_game = font.render(txt_win, True, BLUE)
 
@@ -337,7 +330,7 @@ def won_screen():
     level += 1
 
     wait_for_key()
-    reset()
+    pygame.quit()
 
 
 def death_screen():
@@ -358,9 +351,10 @@ def death_screen():
 def eval_outcome(won: bool, died: bool):
     """simple function to run the win or die screen after checking won or died"""
     if won:
-        #won_screen()
+        won_screen()
         return True
     if died:
+
         return True
         #death_screen()
 
@@ -578,36 +572,38 @@ def initialize_pop(population, fittest, mutation): #OUR CODE
 
 
 
-def playGame():
-    global angle, player, start, CameraX
-    while True:
-        try:
-            generations = int(input('How many generations do you want? - (between 5 and 15)'))
-            if (generations >= 5 and generations <= 15):
-                break
-            else:
-                print("Please input a number in the range")
-        except ValueError:
-            print("Please input a number")
-    while True:
-        try:
-            population_size = int(input('What population size do you want? - (between 5 and 15)'))
-            if (population_size >= 5 and population_size <= 15):
-                break
-            else:
-                print("Please input a number in the range")
-        except ValueError:
-            print("Please input a number")
+def playGame(input_version, generations=None, population_size=None, mutation=None):
 
-    while True:
-        try:
-            mutation = int(input('What mutation factor do you want? - (between 30 and 100)'))
-            if (mutation >= 30 and mutation <= 100):
-                break
-            else:
-                print("Please input a number in the range")
-        except ValueError:
-            print("Please input a number")
+    global angle, player, start, CameraX
+    if input_version:
+        while True:
+            try:
+                generations = int(input('How many generations do you want? - (between 5 and 15)'))
+                if (generations >= 5 and generations <= 15):
+                    break
+                else:
+                    print("Please input a number in the range")
+            except ValueError:
+                print("Please input a number")
+        while True:
+            try:
+                population_size = int(input('What population size do you want? - (between 5 and 15)'))
+                if (population_size >= 5 and population_size <= 15):
+                    break
+                else:
+                    print("Please input a number in the range")
+            except ValueError:
+                print("Please input a number")
+
+        while True:
+            try:
+                mutation = int(input('What mutation factor do you want? - (between 30 and 100)'))
+                if (mutation >= 30 and mutation <= 100):
+                    break
+                else:
+                    print("Please input a number in the range")
+            except ValueError:
+                print("Please input a number")
     fittest = AI_Player(None, mutation)
     for i in range(generations):
         new_population = initialize_pop(population_size, fittest, mutation)
@@ -687,9 +683,10 @@ def playGame():
                 fittest = individual
                 print("new pb")
         print(fittest.fitness)
-        print("this is generation " + str(i))
+        print("this is generation " + str(i+1))
 
 if __name__ == "__main__":
-    playGame()
+    # playGame(False, 1, 1, 50)
+    playGame(True)
 
 pygame.quit()
