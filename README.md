@@ -13,6 +13,8 @@ Have an introductory familiarity with simple AI, so that it doesn’t seem as sc
 Learn how to implement AI into this game. 
 Learn about how to make an effective lesson plan and think about which elements of our program to highlight in order to make the ideas digestible to the student. We’ve found so far that learning how to teach this forces us to understand the forms and functions of artificial intelligence more comprehensively! 
 
+In our repository, find our lesson plan. The lesson plan includes videos of the program running, and a text walk-through that introduces the user to AI. At the end of the slideshow, it prompts the user to try game.py in their own terminal! When they use game.py, they can modify the meta-parameters and play around with mutation factor, population size, and number of generations. 
+
 
 **Inputs for our game’s script:**
 Meta-Parameters
