@@ -576,7 +576,7 @@ def playGame(input_version, speed, generations=None, population_size=None, mutat
     if input_version:
         while True:
             try:
-                generations = int(input('How many generations do you want? - (between 5 and 15)'))
+                generations = int(input('How many generations do you want? - (between 5 and 15) '))
                 if (generations >= 5 and generations <= 15):
                     break
                 else:
@@ -585,7 +585,7 @@ def playGame(input_version, speed, generations=None, population_size=None, mutat
                 print("Please input a number")
         while True:
             try:
-                population_size = int(input('What population size do you want? - (between 5 and 15)'))
+                population_size = int(input('What population size do you want? - (between 5 and 15) '))
                 if (population_size >= 5 and population_size <= 15):
                     break
                 else:
@@ -595,7 +595,7 @@ def playGame(input_version, speed, generations=None, population_size=None, mutat
 
         while True:
             try:
-                mutation = int(input('What mutation factor do you want? - (between 30 and 100)'))
+                mutation = int(input('What mutation factor do you want? - (between 30 and 100) '))
                 if (mutation >= 30 and mutation <= 100):
                     break
                 else:
