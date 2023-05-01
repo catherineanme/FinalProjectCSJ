@@ -19,5 +19,14 @@ Meta-Parameters Population Size Number of Generations Mutation Factor
 **What our script outputs:**
 The user inputs meta parameters, and then the bots play Geometry Dash according to those parameters. 
 
+
+**HOW YOU RUN THIS CODE!**
+1. Download the repository onto your laptop. 
+2. Open up your terminal. 
+3. Change directories so that you are in the Pydash-main file. (the directory path will be different depending on how your laptop is set up) 
+4. Once you're there, type python3 game.py
+5. Input the parameters you want -- we like  5 generations, 15 population, 40 mutation factor but really you can do anything in the specified ranges. 
+6. Have fun playing with the parameters! Thank you for engaging with our project! 
+
 **Important Citation Note:** We found Geometry Dash on GitHub already coded in Python by Yonah Aviv from MIT. We used Aviv's code as a base, then modified the game style a bit to better suit our purposes (his existing obstacles were a bit too big, etc), and then incorporated our AI program into the game code.
 
