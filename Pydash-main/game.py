@@ -570,9 +570,7 @@ def initialize_pop(population, fittest, mutation): #OUR CODE
         individuals.append(new_player)
     return individuals
 
-
-
-def playGame(input_version, generations=None, population_size=None, mutation=None):
+def playGame(input_version, speed, generations=None, population_size=None, mutation=None):
 
     global angle, player, start, CameraX
     if input_version:
@@ -677,7 +675,7 @@ def playGame(input_version, generations=None, population_size=None, mutation=Non
                             player.jump_amount -= 1
 
                 pygame.display.flip()
-                clock.tick(1000)
+                clock.tick(speed)
                 frame += 1
             if individual.fitness > fittest.fitness:
                 fittest = individual
@@ -686,7 +684,8 @@ def playGame(input_version, generations=None, population_size=None, mutation=Non
         print("this is generation " + str(i+1))
 
 if __name__ == "__main__":
-    # playGame(False, 1, 1, 50)
-    playGame(True)
+    #playGame(False, 60, 1, 1, 50)
+    #playGame(False, 60, 1, 10, 50)
+    playGame(True, 500)
 
 pygame.quit()
