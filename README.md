@@ -1,4 +1,5 @@
 **Our CS32 Final Project Repository!**
+
 Welcome to our CS32 Final Project! As Artificial Intelligence (AI) becomes more prevalent in today's world, we realized that so many people are scared of its powers. AI is difficult to understand as so much happens behind the scenes in its programming. In order to make the process of AI more understandable and accessible, we created a simple game and had AI play it. We then combined this program with a written learning module for our product.
 
 The lesson plan is a text walk-through accompanied by screen-recorded videos of the program running according to different parameters. At its ending, the lesson prompts the user to try game.py in their own terminal! When the student runs game.py, they can modify the meta-parameters and play around with mutation factor, population size, and number of generations. 
